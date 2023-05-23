@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="error_net_504">网络不给力</string>
+    <string name="error_net_404">服务器异常，请稍后再试</string>
+    <string name="error_net_time_out">网络连接超时</string>
+    <string name="error_net_connect">请检查您的网络或稍后再试</string>
+    <string name="error_net_server">无法连接到服务器，请检查您的网络或稍后再试</string>
+    <string name="error_net_retry">无法连接到服务器，请稍后重试</string>
+    <string name="error_server_ssl_failed">服务端证书验证失败！</string>
+    <string name="photograph">拍照</string>
+    <string name="select_from_photo_albums">从手机相册选择</string>
+</resources>

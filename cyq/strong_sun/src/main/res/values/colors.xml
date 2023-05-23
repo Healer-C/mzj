@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDark">#ff277fea</color>
+    <color name="whith">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="c_2B2B2B">#2B2B2B</color>
+    <color name="c_cccccc">#cccccc</color>
+    <color name="grey_333333_color">#333333</color>
+    <color name="c_e6e6e6">#e6e6e6</color>
+    <color name="tred">#20ff0000</color>
+    <color name="light_white">#f4f0f0</color>
+    <color name="grey">#cccccc</color>
+    <color name="transparent">#00000000</color>
+    <color name="grey_divider">#E5E5E5</color>
+    <color name="ylssnyd_actionbar_bg">#1AB394</color>
+    <color name="title_black">#222222</color>
+    <color name="c_999999">#999999</color>
+    <color name="c_f4f4f4">#f4f4f4</color>
+    <color name="c_277FEA">#277FEA</color>
+</resources>

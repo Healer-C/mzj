@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+//    com.cy.map  朝阳区
+//    com.cy.ftq  丰台区
+//    com.cy.kfq  开发区
+//    com.cy.mzj  民政局
+    defaultConfig {
+        applicationId "com.cy.mzj"
+        minSdkVersion 21
+//        targetSdkVersion 27
+        //versionCode 36
+        versionName "1.0.36"
+
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi-v7a', 'x86'//, 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+
+    signingConfigs {
+        niuba_debug {
+            keyAlias 'key0'
+            keyPassword '901129'
+            storeFile file('F:\\CXY\\WorkPlace\\AndroidStudioProjects\\SceneMap\\cyq\\key.jks')
+            storePassword '901129'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    signingConfigs {
+        debug {
+            storeFile file('F:\\CXY\\WorkPlace\\AndroidStudioProjects\\SceneMap\\cyq\\key.jks')
+            storePassword '901129'
+            keyAlias 'key0'
+            keyPassword '901129'
+        }
+        niuba_debug {
+            keyAlias 'dadi'
+            keyPassword 'dadicehui'
+            storeFile file('F:\\CXY\\WorkPlace\\AndroidStudioProjects\\SceneMap\\cyq\\key.jks')
+            storePassword 'dadicehui'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/x86/libc++_shared.so'
+    }
+
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.all {
+                outputFileName = "北京市界桩管理信息平台-v${variant.versionName}.apk"
+            }
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.google.firebase:firebase-firestore:23.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation project(':strong_sun')
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    implementation 'com.roughike:bottom-bar:2.3.1'
+    implementation 'com.github.Justson.AgentWeb:agentweb-core:v5.0.0-alpha.1-androidx'
+    api 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    api 'net.lingala.zip4j:zip4j:1.3.2'
+    implementation 'com.github.youlookwhat:ByWebView:1.2.0'
+    api 'com.tencent.tbs:tbssdk:44226'
+
+}

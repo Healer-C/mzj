@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
+    <com.esri.arcgisruntime.mapping.view.MapView
+        android:id="@+id/mapView"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dp_m_60"
+        android:layout_marginBottom="@dimen/dp_m_60" />
+
+    <ImageView
+        android:id="@+id/iv_layer"
+        android:layout_width="@dimen/dp_30"
+        android:layout_height="@dimen/dp_30"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:foreground="?selectableItemBackground"
+        android:src="@mipmap/layer" />
+
+    <com.roughike.bottombar.BottomBar
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_60"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_m_20"
+        app:bb_tabXmlResource="@xml/bottombar_tabs" />
+
+    <LinearLayout
+        android:id="@+id/ll_booton"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_40"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_close"
+            android:src="@mipmap/close"
+            android:layout_marginBottom="@dimen/dp_2"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:background="@color/colorPrimaryDark"
+  >
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_10"
+                android:text="朝阳"
+                android:textColor="@color/whith" />
+
+            <TextView
+                android:id="@+id/detial"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_margin="@dimen/dp_3"
+                android:paddingRight="@dimen/dp_10"
+                android:background="@drawable/gray_shape"
+                android:gravity="center_vertical"
+                android:text="详 情"
+                android:visibility="gone"
+                android:textColor="@color/whith" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whith"
+            android:paddingBottom="@dimen/dp_3"
+            android:visibility="gone" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/whith"
+            android:paddingBottom="@dimen/dp_3"
+            android:visibility="gone" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

@@ -1,0 +1,203 @@
+/*
+ * Copyright 2017 wshunli
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package com.utile.strong_sun.map_utile.tianditu_cache_lib;
+
+
+import android.util.Log;
+
+import com.esri.arcgisruntime.arcgisservices.TileInfo;
+import com.esri.arcgisruntime.data.TileKey;
+import com.esri.arcgisruntime.geometry.Envelope;
+import com.esri.arcgisruntime.layers.ImageTiledLayer;
+import com.utile.strong_sun.MyApplication;
+import com.utile.strong_sun.utiles.Network;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class TianDiTuLayer extends ImageTiledLayer {
+
+    private static final String TAG = "TianDiTuLayer";
+
+    private int layerType = 0;
+    private String cachePath = null;
+    private TianDiTuLayerInfo layerInfo;
+    private String token = null;
+
+    public TianDiTuLayer(TileInfo tileInfo, Envelope fullExtent) {
+        super(tileInfo, fullExtent);
+           System.out.println(tileInfo.getSpatialReference().toJson()+"????????");
+
+    }
+
+    @Override
+    protected byte[] getTile(TileKey tileKey) {
+        if (this.getToken() == null) {
+            Log.e(TAG, "Please set the token value. See http://lbs.tianditu.gov.cn/authorization/authorization.html");
+        }
+        int level = tileKey.getLevel();
+        int col = tileKey.getColumn();
+        int row = tileKey.getRow();
+        if (level > layerInfo.getMaxZoomLevel()
+                || level < layerInfo.getMinZoomLevel())
+            return new byte[0];
+        byte[] bytes = null;
+        bytes = getOfflineCacheFile(cachePath, level, col, row);
+        if (bytes==null){
+            if(Network.isConnected(MyApplication.getContext())) {
+                String url = layerInfo.getUrl()
+                        + "?service=wmts&request=gettile&version=1.0.0&tk=" + token + "&layer="
+                        + layerInfo.getLayerName() + "&format=tiles&tilematrixset="
+                        + layerInfo.getTileMatrixSet() + "&tilecol=" + col
+                        + "&tilerow=" + row + "&tilematrix=" + (level);
+
+                try {
+                    HttpURLConnection httpConnection = (HttpURLConnection) new URL(url).openConnection();
+                    httpConnection.setRequestMethod("GET");
+                    httpConnection.setConnectTimeout(3000);
+//                    httpConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36");
+                    InputStream in = httpConnection.getInputStream();
+                    bytes = getBytes(in);
+                    httpConnection.disconnect();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (cachePath != null && bytes != null) {
+                    AddOfflineCacheFile(cachePath, level, col, row, bytes);
+                }
+            }
+        }
+        // 在线时加载在线影像资源，离线时从本地获取资源。
+//        if(!Util.isNetworkAvailable(App.getInstance())){
+//            // 离线
+//            if (cachePath != null)
+//                bytes = getOfflineCacheFile(cachePath, level, col, row);
+//        } else {
+//            // 在线
+//            bytes = null;
+//        }
+//        if (bytes == null) {
+//            String url = layerInfo.getUrl()
+//                    + "?service=wmts&request=gettile&version=1.0.0&tk=" + token + "&layer="
+//                    + layerInfo.getLayerName() + "&format=tiles&tilematrixset="
+//                    + layerInfo.getTileMatrixSet() + "&tilecol=" + col
+//                    + "&tilerow=" + row + "&tilematrix=" + (level);
+//
+//            try {
+//                HttpURLConnection httpConnection = (HttpURLConnection) new URL(url).openConnection();
+//                httpConnection.setRequestMethod("GET");
+//                httpConnection.setConnectTimeout(5000);
+//                InputStream in = httpConnection.getInputStream();
+//                bytes = getBytes(in);
+//                httpConnection.disconnect();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            if (cachePath != null && bytes != null) {
+//                AddOfflineCacheFile(cachePath, level, col, row, bytes);
+//            }
+//        }
+        return bytes;
+    }
+
+
+    // 保存切片到本地
+    private void AddOfflineCacheFile(String cachePath, int level, int col, int row, byte[] bytes) {
+
+        File file = new File(cachePath);
+        if (!file.exists()) file.mkdirs();
+        File levelFile = new File(cachePath + "/" + level);
+        if (!levelFile.exists()) levelFile.mkdirs();
+        File rowFile = new File(cachePath + "/" + level + "/" + col + "x" + row
+                + ".tdt");
+
+        if (!rowFile.exists()) {
+            try {
+                FileOutputStream out = new FileOutputStream(rowFile);
+                out.write(bytes);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    // 从本地获取切片
+    private byte[] getOfflineCacheFile(String cachePath, int level, int col, int row) {
+        byte[] bytes = null;
+        try {
+            File rowFile = new File(cachePath + "/" + level + "/" + col + "x" + row
+                    + ".tdt");
+            if (rowFile.exists()) {
+                try {
+                    FileInputStream in = new FileInputStream(rowFile);
+                    bytes = getBytes(in);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                bytes = null;
+            }
+        }catch (Exception e){
+
+        }
+        return bytes;
+    }
+
+    // 读取字节数组
+    private byte[] getBytes(InputStream is) throws IOException {
+        ByteArrayOutputStream out = new ByteArrayOutputStream(1024);
+        byte[] temp = new byte[1024];
+        int size;
+        while ((size = is.read(temp)) != -1) {
+            out.write(temp, 0, size);
+        }
+        is.close();
+        out.flush();
+        return out.toByteArray();
+    }
+
+    public int getLayerType() {
+        return layerType;
+    }
+
+    public void setLayerType(int layerType) {
+        this.layerType = layerType;
+        this.layerInfo = LayerInfoFactory.getLayerInfo(layerType);
+    }
+
+    public String getCachePath() {
+        return cachePath;
+    }
+
+    public void setCachePath(String cachePath) {
+        this.cachePath = cachePath == null ? null : cachePath + "/" + layerInfo.getLayerName() + "_" + layerInfo.getTileMatrixSet() + "/";
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+}

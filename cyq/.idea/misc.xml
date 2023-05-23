@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/SceneMap/cyq/app/src/main/res/drawable/gray_shape.xml" value="0.236" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/SceneMap/cyq/app/src/main/res/drawable/login_shape.xml" value="0.236" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/SceneMap/cyq/app/src/main/res/layout/activity_splash.xml" value="0.18" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/SceneMap/cyq/app/src/main/res/layout/login_activity.xml" value="0.20742753623188406" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/drawable/gray_shape.xml" value="0.1675" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/drawable/ic_cyq.xml" value="0.1675" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/drawable/location_anim.xml" value="0.1" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/drawable/login_shape.xml" value="0.1675" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/layout/activity_splash.xml" value="0.17760416666666667" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/layout/activity_webview.xml" value="0.21666666666666667" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/layout/login_activity.xml" value="0.17760416666666667" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/layout/main_activity.xml" value="0.17760416666666667" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/layout/pdf_activity.xml" value="0.21666666666666667" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/layout/point_detial_activity.xml" value="0.21666666666666667" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/layout/qx_jx_detial_activity.xml" value="0.21666666666666667" />
+        <entry key="..\:/CXY/WorkPlace/AndroidStudioProjects/mzj/cyq/app/src/main/res/menu/catalogue.xml" value="0.17760416666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

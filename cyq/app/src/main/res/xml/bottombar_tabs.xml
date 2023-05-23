@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+<!--    <tab-->
+<!--        id="@+id/tab_one"-->
+<!--        title="朝阳概况"-->
+<!--         />-->
+<!--    <tab-->
+<!--        id="@+id/tab_one"-->
+<!--        title="丰台概况"-->
+<!--        />-->
+<!--    <tab-->
+<!--        id="@+id/tab_one"-->
+<!--        title="开发区概况"-->
+<!--        />-->
+    <tab
+        id="@+id/tab_one"
+        title="概况"
+        />
+    <tab
+        id="@+id/tab_two"
+        title="区划管理"
+        />
+    <tab
+        id="@+id/tab_three"
+        title="地域信息"
+        />
+    <tab
+        id="@+id/tab_four"
+        title="政策法规"
+        />
+</tabs>

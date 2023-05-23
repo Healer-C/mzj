@@ -1,0 +1,96 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion 29
+    buildToolsVersion '29.0.2'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    defaultConfig {
+        minSdkVersion 21
+//        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi-v7a' , 'x86'//, 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    testImplementation 'junit:junit:4.12'
+    implementation 'androidx.test.ext:junit:1.1.0'
+    implementation 'androidx.test.espresso:espresso-core:3.2.0'
+    //https://github.com/square/retrofit
+    api 'com.squareup.retrofit2:retrofit:2.7.0'
+    api 'com.squareup.retrofit2:converter-gson:2.7.0'
+    api 'com.squareup.retrofit2:adapter-rxjava:2.7.0'
+    api 'io.reactivex.rxjava2:rxandroid:2.1.1'
+    api 'io.reactivex.rxjava2:rxjava:2.x.x'
+    api 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    api 'com.squareup.retrofit2:retrofit-converters:2.7.0'
+    api 'com.squareup.okhttp3:logging-interceptor:4.2.2'
+    //https://github.com/greenrobot/EventBus
+    api 'org.greenrobot:eventbus:3.1.1'
+    //浏览器调试
+    api 'com.facebook.stetho:stetho:1.5.0'
+    api 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    //http 日志打印
+    api 'com.jakewharton.timber:timber:4.7.1'
+
+    //https://github.com/CymChad/BaseRecyclerViewAdapterHelper
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.2'
+    //https://github.com/LuckSiege/PictureSelector
+    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.3'
+    //https://github.com/jenly1314/ZXingLite
+    api 'androidx.appcompat:appcompat:1.1.0'
+    api 'com.google.zxing:core:3.3.3'
+    api 'com.king.zxing:zxing-lite:1.1.6-androidx'
+    api 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    api 'com.tencent:mmkv:1.0.23'
+    //    https://github.com/LitePalFramework/LitePal
+    api 'org.litepal.android:java:3.0.0'
+    //https://github.com/bumptech/glide
+    api 'com.github.bumptech.glide:glide:4.10.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    api 'com.esri.arcgisruntime:arcgis-android:100.8.0'
+
+    api 'com.lxj:xpopup:1.8.10-x'
+    api 'com.ycjiang:ImagePreview:2.2.6'
+    //https://github.com/LuckSiege/PictureSelector
+    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.3'
+
+    api 'com.github.zcweng:switch-button:0.0.3@aar'
+    api 'pub.devrel:easypermissions:2.0.1'
+
+    api 'com.github.QuadFlask:colorpicker:0.0.13'
+    api 'com.tencent.bugly:crashreport_upgrade:latest.release'
+    api 'com.tencent.bugly:nativecrashreport:latest.release'
+    api 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    api 'com.github.donkingliang:LabelsView:1.5.0'
+    api 'com.github.getActivity:XXPermissions:12.8'
+    api 'com.tencent.map.geolocation:TencentLocationSdk-openplatform:7.2.6'
+    api 'com.github.getActivity:ToastUtils:10.0'
+    api 'com.github.tamsiree.RxTool:RxKit:2.6.3'
+    api 'net.lingala.zip4j:zip4j:1.3.2'
+    implementation 'com.geyifeng.immersionbar:immersionbar:3.2.2'
+//    api 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
+}
